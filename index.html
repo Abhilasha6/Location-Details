@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps API</title>
+    <script async="false" type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4F4_0iK0itpJckv71OFyuBZwohrpYt3s&libraries=places&callback=initMap"></script>
+
+</head>
+
+<body>
+    <p id="location-info">Location Info</p>
+    <div id="map" style="width: 400px; height: 400px;"></div>
+    <script>
+        async function initMap() {
+            
+
+            const { Map } = await google.maps.importLibrary("maps");
+
+            navigator.geolocation.getCurrentPosition(function (position) {
+
+                //location
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+
+                var map = new Map(document.getElementById("map"), {
+                    zoom: 15,
+                    center: { lat: lat, lng: lng }
+                });
+
+
+                // Elevation API
+                const elevator = new google.maps.ElevationService();
+                const locations = [{ location: { lat: lat, lng: lng } }];
+                // console.log(locations);
+                // console.log(elevator);
+                elevator.getElevationForLocations(locations, function (results, status) {
+                    // console.log(results) not working
+                    if (status === google.maps.ElevationStatus.OK) {
+                        const elevation = results[0].elevation;
+                       
+                        document.getElementById("location-info").innerHTML = `Latitude: ${lat.toFixed(4)}<br>Longitude: ${lng.toFixed(4)}<br>Elevation: ${elevation} meters`;
+                    } else {
+                        console.error("Elevation request failed:", status);
+                    }
+                });
+
+            }, function () {
+                console.error("Geolocation failed!");
+            });
+        }
+    </script>
+</body>
+
+</html>
