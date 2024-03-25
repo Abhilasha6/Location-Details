@@ -1,57 +1,82 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Maps API</title>
-    <script async="false" type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4F4_0iK0itpJckv71OFyuBZwohrpYt3s&libraries=places&callback=initMap"></script>
+    <title>Elevation Along a Path</title>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://www.google.com/jsapi"></script>
+
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script type="module" src="./script.js"></script>
+
+
+    <!-- <script>
+        function getLatLong(address, callback) {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var location = results[0].geometry.location;
+                    callback(location.lat(), location.lng());
+                } else {
+                    console.error('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var submitButton = document.getElementById('submit-button');
+            submitButton.addEventListener('click', function () {
+                var startLocationInput = document.getElementById('start-location').value;
+                var endLocationInput = document.getElementById('end-location').value;
+
+                getLatLong(startLocationInput, function (startLat, startLng) {
+                    console.log('Start Location Latitude:', startLat);
+                    console.log('Start Location Longitude:', startLng);
+                });
+
+                getLatLong(endLocationInput, function (endLat, endLng) {
+                    console.log('End Location Latitude:', endLat);
+                    console.log('End Location Longitude:', endLng);
+                });
+            });
+        });
+    </script> -->
 
 </head>
 
 <body>
-    <p id="location-info">Location Info</p>
-    <div id="map" style="width: 400px; height: 400px;"></div>
-    <script>
-        async function initMap() {
-            
+    <div>
+        <h3>Elevation Profile</h3>
+        <p>Enter start and end locations:</p>
+        <input type="text" id="start-location" placeholder="Start Location">
+        <input type="text" id="end-location" placeholder="End Location">
+        <button id="submit-button">Get Elevation Profile</button>
+        <br> <br>
 
-            const { Map } = await google.maps.importLibrary("maps");
 
-            navigator.geolocation.getCurrentPosition(function (position) {
-
-                //location
-                const lat = position.coords.latitude;
-                const lng = position.coords.longitude;
-
-                var map = new Map(document.getElementById("map"), {
-                    zoom: 15,
-                    center: { lat: lat, lng: lng }
+        <!-- <script type="text/javascript">
+            //trying for search input's location autocomplete
+            var searchInput = 'start-location';
+            $(document).ready(function () {
+                var autocomplete;
+                autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), { types: ['geocode'], });
+                google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                    var near_place = autocomplete.getPlace();
                 });
+                //similiar for end-location autocomplete
 
-
-                // Elevation API
-                const elevator = new google.maps.ElevationService();
-                const locations = [{ location: { lat: lat, lng: lng } }];
-                // console.log(locations);
-                // console.log(elevator);
-                elevator.getElevationForLocations(locations, function (results, status) {
-                    // console.log(results) not working
-                    if (status === google.maps.ElevationStatus.OK) {
-                        const elevation = results[0].elevation;
-                       
-                        document.getElementById("location-info").innerHTML = `Latitude: ${lat.toFixed(4)}<br>Longitude: ${lng.toFixed(4)}<br>Elevation: ${elevation} meters`;
-                    } else {
-                        console.error("Elevation request failed:", status);
-                    }
-                });
-
-            }, function () {
-                console.error("Geolocation failed!");
             });
-        }
-    </script>
+
+        </script> -->
+
+
+        <div id="map" style="height: 400px "></div>
+        <div id="elevation_chart"></div>
+    </div>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4F4_0iK0itpJckv71OFyuBZwohrpYt3s&callback=initMap&v=weekly&ibraries=places"
+        defer></script>
 </body>
 
 </html>
