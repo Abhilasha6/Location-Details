@@ -118,7 +118,8 @@ function initMap(paths) {
   const elevator = new google.maps.ElevationService();
 
   // Draw the path, using the Visualization API and the Elevation service.
-  //to display the route from start to end, add 'map' to the below calling and uncomment above const map & below polyline method
+  //to display the route from start to end, add 'map' to the below calling 
+  //and uncomment above const map & below polyline method & map div in index page
   displayPathElevation(paths, elevator);
 }
 
