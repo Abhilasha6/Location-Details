@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const endCoords = await getLatLong(endLocationInput);
 
     if (!startCoords || !endCoords) {
-      return alert("Geocoding unsuccessful");
+      return alert("Invalid Inputs");
     }
 
     console.log("Start location", startLocationInput, startCoords);
@@ -171,9 +171,10 @@ function plotElevation({ results }) {
     height: 250,
     innerWidth: 250,
     legend: "none",
+    color: "white",
     // @ts-ignore TODO update to newest visualization library
     titleY: "Elevation (m)",
-    titleX: "Points from start location to end location",
+    titleX: "Points along path",
   });
 }
 
