@@ -46,32 +46,14 @@
 
 <body>
     <div>
-        <h3>Elevation Profile</h3>
-        <p>Enter start and end locations:</p>
+        <h2>Enter start and end locations:</h2>
         <input type="text" id="start-location" placeholder="Start Location">
         <input type="text" id="end-location" placeholder="End Location">
-        <button id="submit-button">Get Elevation Profile</button>
+        <button id="submit-button">Get Elevation Details</button>
         <br> <br>
 
-
-        <!-- <script type="text/javascript">
-            //trying for search input's location autocomplete
-            var searchInput = 'start-location';
-            $(document).ready(function () {
-                var autocomplete;
-                autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), { types: ['geocode'], });
-                google.maps.event.addListener(autocomplete, 'place_changed', function () {
-                    var near_place = autocomplete.getPlace();
-                });
-                //similiar for end-location autocomplete
-
-            });
-
-        </script> -->
-
-
-        <div id="map" style="height: 400px "></div>
-        <div id="elevation_chart"></div>
+        <!-- <div id="map" style="height: 250px "></div> -->
+        <div id="elevation_chart" style="height: 250px "></div>
     </div>
 
     <script
