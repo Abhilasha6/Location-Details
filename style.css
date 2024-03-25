@@ -1,11 +1,26 @@
- #map, #chart {
+ #map, #elevation_chart {
     height: 100%;
-    width: 100%;
+    width: 75%;
+    margin: 20px 10px;
   }
 
   html,
   body {
-    height: 100%;
-    margin: 10px auto;
+    margin: 10px 10px;
     padding: 0;
+    background-image: url(istockphoto-1292555104-612x612.jpg);
+    background-size: auto;
+    overflow: hidden;
+    font-family: "Tauri", sans-serif;
+    }
+
+  .main{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 5% auto;
+    padding: auto;
   }
+
+  
