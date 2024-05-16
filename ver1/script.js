@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // // Load the Visualization API and the columnchart package.
 // // @ts-ignore TODO update to newest visualization library
-google.load("visualization", "1", { packages: ["columnchart"] });
+google.load("visualization", "1", { packages: ["linechart"] });
 
 document.addEventListener("DOMContentLoaded", function () {
   var submitButton = document.getElementById("submit-button");
@@ -108,11 +108,11 @@ function initMap(paths) {
     return;
   }
 
-  // const map = new google.maps.Map(document.getElementById('map'), {
-  // 	zoom: 12,
-  // 	center: paths[0],
-  // 	mapTypeId: 'terrain',
-  // });
+  const map = new google.maps.Map(document.getElementById('map'), {
+  	zoom: 12,
+  	center: paths[0],
+  	mapTypeId: 'terrain',
+  });
 
   // // Create an ElevationService.
   const elevator = new google.maps.ElevationService();
@@ -120,17 +120,17 @@ function initMap(paths) {
   // Draw the path, using the Visualization API and the Elevation service.
   //to display the route from start to end, add 'map' to the below calling 
   //and uncomment above const map & below polyline method & map div in index page
-  displayPathElevation(paths, elevator);
+  displayPathElevation(map, paths, elevator);
 }
 
 function displayPathElevation(path, elevator) {
   // Display a polyline of the elevation path.
-  // new google.maps.Polyline({
-  // 	path: path,
-  // 	strokeColor: '#0000CC',
-  // 	strokeOpacity: 0.4,
-  // 	map: map,
-  // });
+   new google.maps.Polyline({
+  	path: path,
+  	strokeColor: '#0000CC',
+  	strokeOpacity: 0.4,
+  	map: map,
+  });
 
   // Create a PathElevationRequest object using this array. Ask for 256 samples along that path.
   elevator
@@ -152,7 +152,7 @@ function displayPathElevation(path, elevator) {
 function plotElevation({ results }) {
   const chartDiv = document.getElementById("elevation_chart");
   // Create a new chart in the elevation_chart DIV.
-  const chart = new google.visualization.ColumnChart(chartDiv);
+  const chart = new google.visualization.LineChart(chartDiv);
   // Extract the data from which to populate the chart.
   // Because the samples are equidistant, the 'Sample'
   // column here does double duty as distance along the
