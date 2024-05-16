@@ -1,3 +1,3 @@
 # Location-Details
-gives latitude, longitude and elevation details of a location
+Fetch a car drivable route between starting location & destination and provide the route's elevation details
 <br>
